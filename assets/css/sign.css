@@ -1,0 +1,13 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+#sign-form{
+    display: flex;
+    justify-content: center;
+    border: 1px solid black;
+    margin: 0px 555px 0px 555px;
+    padding: 134px;
+    background-color: rgb(63, 193, 46);
+}

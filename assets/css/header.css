@@ -1,0 +1,68 @@
+/* body{
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    display: flex;
+    background-color: rgb(221, 255, 0);
+    justify-content: space-between;
+}
+
+header ul li{
+    list-style: none;
+} */
+
+/* Reset some default margin and padding */
+body, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Style for the header */
+header {
+    background-color: #333;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+/* Style for the navigation links */
+header ul {
+    list-style: none;
+    display: flex;
+    /* align-items: center; */
+}
+
+li {
+    margin: 0 10px;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Style for the user name when logged in */
+/* .user-name {
+    font-weight: bold;
+} */
+
+/* Style for the sign out link */
+/* .sign-out a {
+    color: #ff4444;
+} */
+
+/* Media query for responsive design (adjust as needed) */
+/* @media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    ul {
+        margin-top: 10px;
+    }
+} */
