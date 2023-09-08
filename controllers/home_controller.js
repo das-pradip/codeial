@@ -39,6 +39,3 @@ module.exports.home = async function(req, res){
 
     // populate the user of each post
   
-
-
-
