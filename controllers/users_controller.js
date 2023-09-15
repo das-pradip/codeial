@@ -1,4 +1,5 @@
 const User = require('../models/user');
+
 const fs = require('fs');
 const path = require('path');
 
@@ -82,9 +83,34 @@ module.exports.profile = function(req, res){
 
             if (req.file){
 
-              if (user.avatar){
-                  fs.unlinkSync(path.join(__dirname, '..', user.avatar));
-              }
+
+              if (user.avatar) {
+                const avatarPathToDelete = path.join(__dirname, '..', user.avatar);
+                
+                // Check if the avatar file exists before attempting to delete it
+                fs.stat(avatarPathToDelete, (err, stats) => {
+                    if (err) {
+                        if (err.code === 'ENOENT') {
+                            // The file doesn't exist, so no need to delete it
+                            console.log('Avatar file does not exist.');
+                        } else {
+                            // Handle other errors
+                            console.error('Error checking avatar file:', err);
+                        }
+                    } else {
+                        // The file exists, so we can safely delete it
+                        fs.unlinkSync(avatarPathToDelete);
+                    }
+                });
+            }
+            
+            // Rest of your code for updating the user's avatar and saving it
+            
+
+
+              // if (user.avatar){
+              //     fs.unlinkSync(path.join(__dirname, '..', user.avatar));
+              // }
               // this is saving the path of the uploaded file into the avatar field in the user
                 user.avatar = User.avatarPath + '/' + req.file.filename;
             }

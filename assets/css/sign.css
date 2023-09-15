@@ -1,13 +1,109 @@
-body{
-    margin: 0;
-    padding: 0;
-}
-
-#sign-form{
-    display: flex;
-    justify-content: center;
-    border: 1px solid black;
-    margin: 0px 555px 0px 555px;
-    padding: 134px;
-    background-color: rgb(63, 193, 46);
-}
+/* Your existing styles */
+#sign-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #7ed2ce;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease, transform 0.5s ease, opacity 0.5s ease;
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="password"]:focus {
+    border-color: #007bff;
+  }
+  
+  input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.5s ease, opacity 0.5s ease;
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  
+  /* Add unique animation for form elements */
+  @keyframes slideIn {
+    0% {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    50% {
+      transform: translateY(0);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  #sign-form {
+    animation: slideIn 1s ease-in-out forwards;
+  }
+  
+  label,
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="submit"] {
+    animation: slideIn 1s ease-in-out forwards;
+    animation-delay: 0.2s; /* Delay the animation for each element */
+  }
+  
+  input[type="submit"]:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+  }
+  
+  /* Responsive styles */
+  /* Media query for screens smaller than 768px */
+  @media (max-width: 768px) {
+    #sign-form {
+      padding: 10px;
+    }
+  
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      margin-bottom: 5px;
+    }
+  }
+  
+  /* Media query for screens smaller than 480px */
+  @media (max-width: 480px) {
+    #sign-form {
+      max-width: 300px;
+    }
+  
+    input[type="submit"] {
+      font-size: 14px;
+    }
+  }
+  

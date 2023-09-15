@@ -1,5 +1,7 @@
 const Post = require('../models/post');
 const User = require('../models/user');
+//change
+// const Comment = require('../models/comment');
 
 module.exports.home = async function(req, res){
   try{
@@ -13,6 +15,8 @@ module.exports.home = async function(req, res){
           path: 'user'
          }
     });
+    
+   
     
    let users = await User.find({});
      
