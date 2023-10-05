@@ -1,21 +1,26 @@
 const Post = require('../models/post');
 const Comment = require('../models/comment');
+const Like = require('../models/like');
 
 module.exports.create = async function (req, res) {
   try{
     let post = await Post.create({
       content: req.body.content,
-      user: req.user._id,
+      user: req.user._id
       // comments: req.user._id
     });
 
     if(req.xhr){
+      // Adding this line by checking 17 sep 08:31pm
+      // post = await post.populate('user', 'name').execPopulate();
+      post = await post.populate('user', 'name')
+
       return res.status(200).json({
           data: {
             post: post
           },
           message: "Post created!"
-      });
+      }); 
     }
 
     req.flash('success', 'Post published!')
@@ -23,7 +28,7 @@ module.exports.create = async function (req, res) {
   }
   catch(err){
     req.flash('error', err);
-      // console.log('Error', err);
+      console.log('Error', err);
       return res.redirect('back');
   }
 
@@ -34,6 +39,13 @@ module.exports.destroy = async function(req, res){
     let post = await Post.findById(req.params.id)
       // .id means converting the object into string
       if(post.user == req.user.id){
+
+        // CHANGE :: DELETE THE ASSOCIATED LIKES FOR THE POST AND ALL ITS COMMENTS' LIKES TOO
+        await Like.deleteMany({likeable: post, onModel: 'Post'});
+        await Like.deleteMany({_id: {$in: post.comments}})
+
+
+        
         post.remove();
   
        

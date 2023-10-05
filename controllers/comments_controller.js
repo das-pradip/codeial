@@ -3,6 +3,7 @@ const Post = require('../models/post');
 const commentsMailer = require('../mailers/comments_mailer');
 const queue = require('../config/kue');
 const commentEmailWorker = require('../workers/comment_email_worker');
+const Like = require('../models/like');
 
 // module.exports.create = function(req, res){
 //    Post.findById(req.body.post, function(err, post){
@@ -62,9 +63,15 @@ module.exports.create = async function(req, res){
           post.comments.push(comment);
           post.save();
 
+
+           // comment = await comment.populate('user', 'name email')
+
+           // instead of just this above line i use just below line
+          
           comment = await  Comment.populate(comment,"user");
          
-          // commentsMailer.newComment(comment);
+         
+         
           
           let job = queue.create('emails', comment).save(function(err){
             if(err){
@@ -77,8 +84,9 @@ module.exports.create = async function(req, res){
 
           if (req.xhr){
               // similar for comments to fetch the user's id!
-        //  comment = await comment.populate('user', 'name email').execPopulate();
-       
+        // comment = await comment.populate('user', 'name email').execPopulate();
+        comment = await comment.populate('user', 'name email');
+
               return res.status(200).json({
                   data: {
                       comment: comment
@@ -112,6 +120,9 @@ module.exports.create = async function(req, res){
         comment.remove();
 
         let post =  Post.findByIdAndUpdate(postId, { $pull: {comment: req.params.id}})
+
+        //CHANGE :: destroy the associated likes for this comment
+        await Like.deleteMany({likeable: comment._id, onModel: 'Comment'});
 
          // send the comment id which was deleted back to the views
          if (req.xhr){

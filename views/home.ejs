@@ -14,19 +14,17 @@
             <textarea name="content" cols="30" rows="3" placeholder="type" required></textarea>
             <input type="submit" value="Post">
         </form>
-
         <% } %>
 
             <div id="posts-list-container">
                 <ul>
-                    <% for(post of posts){%>
+                    <% for(post of posts){ %>
 
-                        <%- include('_post')-%>
+                        <%-include('_post')-%>
                       
                         <% } %>
                 </ul>
             </div>
-
 </section>
 
 
@@ -38,8 +36,30 @@
         </p>
       <%} %>
 </section>
+
+<!-- chat box -->
+  <%-include('_chat_box')-%>
+
+
+
 </div>
 
 <!-- importing this script for creating the comments -->
 <script src="/js/home_post_comments.js" ></script>
 <script src="/js/home_posts.js"></script>
+
+<!-- CHANGE :: import the script file for toggle likes, also run it over the already present posts and comments on the page -->
+<script src="/js/toggle_likes.js"></script>
+<script>
+    $('.toggle-like-button').each(function(){
+        let self = this;
+        let toggleLike = new ToggleLike(self);
+    })
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
+<script src="/js/chat_engine.js"></script>
+<% if (locals.user){ %>
+<script>
+    new chatEngine('user-chat-box', '<%= locals.user.email %>')
+</script>
+<% } %>
