@@ -1,4 +1,7 @@
+require('dotenv').config();
 const express = require('express');
+const env = require('./config/environment');
+const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 
@@ -37,6 +40,7 @@ app.use(cors(corsOptions));
 chatServer.listen(5000);
 console.log('chat server is listening on port 5000');
 
+// const path = require('path');
 // const sassMiddleware = require('sass-middleware');
 
 // app.use(sassMiddleware({
@@ -50,10 +54,13 @@ app.use(express.urlencoded());
 
 app.use(cookieParser());
 
-app.use(express.static(path.join(__dirname, 'assets')));
+// app.use(express.static(path.join(__dirname, 'assets')));
+app.use(express.static(path.join(__dirname, env.asset_path)));
 // app.use(express.static('./assets'));
 //make the uploads path available to the browser
 app.use('/uploads', express.static(__dirname + '/uploads'))
+
+app.use(logger(env.morgan.mode, env.morgan.options));
 
 app.use(expressLayouts);
 //extract style and scripts from sub pages into layout
@@ -75,7 +82,8 @@ app.set('views', './views');
 app.use(session({
     name: 'codeial',
     // TODO change the secret before deployment in production mode
-    secret: 'blah hsomething',
+    // secret: 'blahsomething',
+    secret: env.session_cookie_key,
     saveUninitialized: false,
     resave: false,
     store: new MongoStore({

@@ -1,9 +1,11 @@
 const nodemailer = require("nodemailer");
 const ejs = require('ejs');
 const path = require('path');
+const env = require('./environment');
 
-
-let transporter = nodemailer.createTransport({
+let transporter = nodemailer.createTransport(
+    env.smtp
+    // {
 //    service: 'gmail',
 //    host: 'smtp.gmail.com',
 //    port: 587,
@@ -12,13 +14,17 @@ let transporter = nodemailer.createTransport({
 //        user: 'pd2691999@gmail.com',
 //        pass: '12345'
 //    }
-host: 'smtp.ethereal.email',
-port: 587,
-auth: {
-    user: 'shawna.dickens@ethereal.email',
-    pass: '5TJJhCfsNmexjqvjSB'
-}
-});
+
+
+// host: 'smtp.ethereal.email',
+// port: 587,
+// auth: {
+//     user: 'shawna.dickens@ethereal.email',
+//     pass: '5TJJhCfsNmexjqvjSB'
+// }
+
+// }
+);
 
 
 let renderTemplate = (data, relativePath) => {

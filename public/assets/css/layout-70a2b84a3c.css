@@ -1,0 +1,91 @@
+/* Style the post container */
+body{
+    background-color: #8aacd1;
+}
+li {
+    background-color: #9ad488; /* Change the background color */
+    border: 1px solid #e0e0e0;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px; /* Increase the gap between posts */
+    padding: 20px; /* Increase the padding for the post section */
+    border-radius: 5px;
+  }
+  
+  /* Style the post header */
+  li p small {
+    color: #260e0e;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+  
+  /* Style the delete button */
+  .delete-post-button {
+    color: #ff0000;
+    text-decoration: none;
+    margin-left: 10px;
+    font-weight: bold;
+  }
+  
+  /* Style the post content */
+  p {
+    font-size: 18px; /* Increase the font size for the post content */
+    margin: 10px 0;
+    line-height: 1.4;
+  }
+  
+  /* Style the comment form */
+  form {
+    margin-top: 20px;
+  }
+  
+  input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+  }
+  
+  input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+  }
+  
+  /* Style the comment list */
+  .post-comments-list {
+    margin-top: 10px; /* Reduce the margin for the comment section */
+    padding: 10px; /* Increase padding for the comment section */
+    background-color: #fff; /* Set a white background for the comment section */
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  /* Style individual comments */
+  .comment {
+    border: 1px solid #e0e0e0;
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+  /* Style comment user name */
+  .comment small {
+    color: #888;
+    font-size: 12px;
+  }
+  
+  /* Add spacing between comments */
+  .comment + .comment {
+    margin-top: 10px;
+  }
+  
